@@ -1,0 +1,17 @@
+[project]
+name = "stocks"
+version = "0.1.0"
+description = "A project to download price and company data about stocks, run scripts that create technical indicators, and save to a database."
+readme = "README.md"
+authors = [
+    { name = "", email = "" }
+]
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+stocks = "stocks:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
