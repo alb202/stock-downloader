@@ -1,4 +1,4 @@
-from pandera.pandas import DataFrameSchema, Column, Check, Index, MultiIndex
+from pandera.pandas import DataFrameSchema, Column, Check, Index
 
 nasdaq100_schema = DataFrameSchema(
     columns={

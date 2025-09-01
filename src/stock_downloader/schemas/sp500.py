@@ -1,4 +1,4 @@
-from pandera.pandas import DataFrameSchema, Column, Check, Index, MultiIndex
+from pandera.pandas import DataFrameSchema, Column, Check, Index
 
 sp500_schema = DataFrameSchema(
     columns={

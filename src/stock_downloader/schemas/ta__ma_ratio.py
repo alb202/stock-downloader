@@ -1,5 +1,5 @@
 from pandas import Timestamp
-from pandera.pandas import DataFrameSchema, Column, Check, Index, MultiIndex
+from pandera.pandas import DataFrameSchema, Column, Check, Index
 
 ta__ma_ratio_schema = DataFrameSchema(
     columns={
