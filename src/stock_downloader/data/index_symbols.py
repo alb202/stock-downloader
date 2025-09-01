@@ -2,10 +2,6 @@ from pandas import read_html, DataFrame
 from pathlib import Path, PosixPath, WindowsPath
 
 
-from pandas import read_html, DataFrame
-from pathlib import Path, PosixPath, WindowsPath
-
-
 class GetIndexSymbols:
     HTTP_HEADERS = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
@@ -17,8 +13,9 @@ class GetIndexSymbols:
     }
 
     COLUMN_RENAME = {
-        "sp500": {"Company Name": "company_name"},
-        "nasdaq100": {"Company Name": "company_name", "No.": "number", "% Change": "_%_Change"},
+        "sp500": {"Symbol": "symbol", "Company Name": "company_name"},
+        "dowjones": {"Symbol": "symbol"},
+        "nasdaq100": {"Symbol": "symbol", "Company Name": "company_name", "No.": "number", "% Change": "_%_Change"},
     }
 
     INDEX_LIST = {
@@ -31,9 +28,17 @@ class GetIndexSymbols:
         self.sp500_df = self.get_table(self.INDEX_LIST["sp500"]["url"], self.INDEX_LIST["sp500"]["table_index"]).rename(
             columns=self.COLUMN_RENAME.get("sp500")
         )
-        self.dowjones_df = self.get_table(self.INDEX_LIST["dowjones"]["url"], self.INDEX_LIST["dowjones"]["table_index"])
+        self.dowjones_df = self.get_table(self.INDEX_LIST["dowjones"]["url"], self.INDEX_LIST["dowjones"]["table_index"]).rename(
+            columns=self.COLUMN_RENAME.get("dowjones")
+        )
         self.nasdaq100_df = self.get_table(self.INDEX_LIST["nasdaq100"]["url"], self.INDEX_LIST["nasdaq100"]["table_index"]).rename(
             columns=self.COLUMN_RENAME.get("nasdaq100")
+        )
+        self.df = (
+            self.dowjones_df.loc[:, ["symbol"]]
+            .assign(dowjones=True)
+            .merge(self.nasdaq100_df.loc[:, ["symbol"]].assign(nasdaq100=True), how="outer", on="symbol")
+            .merge(self.sp500_df.loc[:, ["symbol"]].assign(sp500=True), how="outer", on="symbol")
         )
 
     def save_data(self, path: str | PosixPath | WindowsPath) -> None:

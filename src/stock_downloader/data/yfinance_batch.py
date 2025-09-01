@@ -7,7 +7,7 @@ import json
 import time
 from tqdm.auto import tqdm
 import os
-from utilities import downcast_numeric_columns
+from stock_downloader.utilities import downcast_numeric_columns
 
 
 class YahooFinanceBatchDownloader:

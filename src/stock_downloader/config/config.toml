@@ -1,0 +1,6 @@
+[database]
+database_folder = "D:/stocks/output/database"
+database_name = 'stocks'
+
+[data]
+output_folder = "D:/stocks/output/raw_data/"

@@ -15,7 +15,7 @@ from datetime import timedelta
 # from numpy import array
 # import plotly.graph_objects as go
 
-from models.data_classes import RegressionResult, RegressionLines, BestCorrelation, BestResults
+from stock_downloader.models.data_classes import RegressionResult, RegressionLines, BestCorrelation, BestResults
 
 
 def back_in_time(date: Timestamp, days: int = 200) -> Timestamp:
@@ -187,8 +187,14 @@ def find_best_pearson_r(
     return BestCorrelation(date=x.iloc[best_idx], corr=best_r)
 
 
-def run_regression_for_symbol(symbol: str, df: DataFrame, date_col: str = "Date", max_regression_days: int = 365, min_regression_days: int = 20) -> None:
+def run_regression_for_symbol(
+    symbol: str, df: DataFrame, date_col: str = "Date", max_regression_days: int = 365, min_regression_days: int = 20
+) -> None:
     results = []
     for regression_date in tqdm(df[date_col], desc=f"Processing {symbol}"):
-        results.append(get_best_result(df=df, symbol=symbol, date=regression_date, max_regression_days=min_regression_days, max_regression_days=max_regression_days))
+        results.append(
+            get_best_result(
+                df=df, symbol=symbol, date=regression_date, min_regression_days=min_regression_days, max_regression_days=max_regression_days
+            )
+        )
     return DataFrame(results).sort_values(["symbol", "date"], ascending=[True, False]).dropna(axis=0, subset=["best_regression_date"])

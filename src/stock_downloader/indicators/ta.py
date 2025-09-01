@@ -2,7 +2,7 @@ from pandas import DataFrame, Series, concat
 from functools import reduce
 import talib as ta
 
-from utilities import downcast_numeric_columns
+from stock_downloader.utilities import downcast_numeric_columns
 
 
 def run_talib_functions(df: DataFrame, talib_functions: list[dict], pattern_columns: list[str]) -> DataFrame:
@@ -20,11 +20,14 @@ def run_talib_functions(df: DataFrame, talib_functions: list[dict], pattern_colu
     results = []
 
     for function_set in talib_functions:
-
         func_name = list(function_set.keys())[0]
         params = function_set.get(func_name)
 
-        func = getattr(ta, func_name)
+        try:
+            func = getattr(ta, func_name)
+        except AttributeError as e:
+            print(f"Invalid talib function: {e}")
+            continue
         # sig = inspect.signature(func)
         # params = sig.parameters
         param_value_list = []
@@ -47,12 +50,12 @@ def run_talib_functions(df: DataFrame, talib_functions: list[dict], pattern_colu
             output = func(**args)
 
             # Handle single or multiple outputs
-            if isinstance(output, Series):
+            if isinstance(output, Series) and len(param_value_list) == 0:
+                df_out = output.rename(f"{func_name}").to_frame()
+            elif isinstance(output, Series):
                 df_out = output.rename(f"{func_name}_{'_'.join(param_value_list)}").to_frame()
             elif isinstance(output, tuple):
-                df_out = concat(
-                    [s.rename(f"{func_name}_{'_'.join(param_value_list)}__{i+1}") for i, s in enumerate(output)], axis=1
-                )
+                df_out = concat([s.rename(f"{func_name}_{'_'.join(param_value_list)}__{i + 1}") for i, s in enumerate(output)], axis=1)
             elif isinstance(output, DataFrame):
                 df_out = output.rename(columns=lambda c: f"{func_name}_{c}")
             else:
@@ -88,7 +91,6 @@ def run_custom_ta(df: DataFrame, custom_ta: list[dict]) -> DataFrame:
     results = []
 
     for function_set in custom_ta:
-
         output_name = function_set.get("output")
         func = function_set.get("func")
         args = {k: df[v] for k, v in function_set.get("columns").items()}

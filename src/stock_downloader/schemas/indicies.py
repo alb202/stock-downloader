@@ -1,6 +1,6 @@
 from pandera.pandas import DataFrameSchema, Column, Check, Index  # , MultiIndex
 
-dowjones_schema = DataFrameSchema(
+indicies_schema = DataFrameSchema(
     columns={
         "symbol": Column(
             dtype="object",
@@ -20,8 +20,30 @@ dowjones_schema = DataFrameSchema(
             description=None,
             title=None,
         ),
-        "company_name": Column(
-            dtype="object",
+        "dowjones": Column(
+            dtype=bool,
+            checks=None,
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "nasdaq100": Column(
+            dtype=bool,
+            checks=None,
+            nullable=False,
+            unique=False,
+            coerce=False,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "sp500": Column(
+            dtype=bool,
             checks=None,
             nullable=False,
             unique=False,
