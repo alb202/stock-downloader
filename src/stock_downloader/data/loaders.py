@@ -4,7 +4,6 @@ from pathlib import Path
 
 def load_config() -> dict:
     path = Path(__file__).parents[1] / "config" / "config.toml"
-    print("path", path)
     return toml.load(open(path, "r"))
 
 
