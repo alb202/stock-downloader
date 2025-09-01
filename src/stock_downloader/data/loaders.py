@@ -1,11 +1,13 @@
 import toml
+from pathlib import Path
 
 
 def load_config() -> dict:
-    url = "src/stock_downloader/config/config.toml"
-    return toml.load(open(url, "r"))
+    path = Path(__file__).parents[1] / "config" / "config.toml"
+    print("path", path)
+    return toml.load(open(path, "r"))
 
 
 def load_column_mappings() -> dict:
-    url = "src/stock_downloader/models/column_mappings.toml"
-    return toml.load(open(url, "r"))
+    path = Path(__file__).parents[1] / "models" / "column_mappings.toml"
+    return toml.load(open(path, "r"))
