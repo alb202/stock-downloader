@@ -1,4 +1,4 @@
-from pandera.pandas import DataFrameSchema, Column, Check, Index, MultiIndex
+from pandera.pandas import DataFrameSchema, Column, Check, Index
 
 nasdaq_symbols_schema = DataFrameSchema(
     columns={
@@ -14,7 +14,7 @@ nasdaq_symbols_schema = DataFrameSchema(
             ],
             nullable=False,
             unique=False,
-            coerce=False,
+            coerce=True,
             required=True,
             regex=False,
             description=None,
@@ -25,7 +25,7 @@ nasdaq_symbols_schema = DataFrameSchema(
             checks=None,
             nullable=False,
             unique=False,
-            coerce=False,
+            coerce=True,
             required=True,
             regex=False,
             description=None,
@@ -36,7 +36,7 @@ nasdaq_symbols_schema = DataFrameSchema(
             checks=None,
             nullable=False,
             unique=False,
-            coerce=False,
+            coerce=True,
             required=True,
             regex=False,
             description=None,
@@ -48,7 +48,7 @@ nasdaq_symbols_schema = DataFrameSchema(
         dtype="int64",
         checks=None,
         nullable=False,
-        coerce=False,
+        coerce=True,
         name=None,
         description=None,
         title=None,

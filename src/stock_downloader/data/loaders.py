@@ -7,6 +7,6 @@ def load_config() -> dict:
     return toml.load(open(path, "r"))
 
 
-def load_column_mappings() -> dict:
-    path = Path(__file__).parents[1] / "models" / "column_mappings.toml"
+def load_mappings(name: str) -> dict:
+    path = Path(__file__).parents[1] / "mappings" / f"{name}.toml"
     return toml.load(open(path, "r"))

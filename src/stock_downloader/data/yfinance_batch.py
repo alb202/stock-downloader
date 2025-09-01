@@ -1,4 +1,4 @@
-from pandas import DataFrame  # , #read_csv, read_parquet, , to_datetime
+from pandas import DataFrame, to_datetime  # , #read_csv, read_parquet, , to_datetime
 from pathlib import Path, PosixPath, WindowsPath
 
 # import yfinance as yf
@@ -32,6 +32,9 @@ class YahooFinanceBatchDownloader:
             self.temp_file.touch()
 
         self.data = self.run()
+        for col in ["Date", "date"]:
+            if col in self.data:
+                self.data[col] = to_datetime(self.data[col])
         # self._save_parquet(output_path=Path(path))
 
         if delete_temp:

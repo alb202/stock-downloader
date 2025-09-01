@@ -8,13 +8,22 @@ import yfinance as yf
 
 
 class YahooFinanceTickerInfo:
-    COLUMN_RENAME = {"52WeekChange": "_52WeekChange"}
+    COLUMN_RENAME = {"52WeekChange": "_52WeekChange", "yield": "_yield"}
 
     """Fetch sector and industry information for a stock symbol using Yahoo Finance."""
 
     def __init__(self, symbol: str) -> None:
         self.symbol = symbol
         self.data = self.get_info()
+        self.data = self._column_rename()
+
+    def _column_rename(self) -> dict:
+        info = self.data
+        for k, v in self.COLUMN_RENAME.items():
+            if k in info.keys():
+                info[v] = info[k]
+                del info[k]
+        return info
 
     def __call__(self) -> dict:
         return [self.data]
@@ -26,7 +35,5 @@ class YahooFinanceTickerInfo:
         info = ticker.info
         # sector = info.get('sector', None)
         # industry = info.get('industry', None)
-        for k, v in self.COLUMN_RENAME.items():
-            info[v] = info[k]
-            del info[k]
+
         return info  # .rename(columns=self.COLUMN_RENAME)

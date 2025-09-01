@@ -15,7 +15,7 @@ price_schema = DataFrameSchema(
             ],
             nullable=False,
             unique=False,
-            coerce=False,
+            coerce=True,
             required=True,
             regex=False,
             description=None,
@@ -37,14 +37,14 @@ price_schema = DataFrameSchema(
             ],
             nullable=False,
             unique=False,
-            coerce=False,
+            coerce=True,
             required=True,
             regex=False,
             description=None,
             title=None,
         ),
         "open": Column(
-            dtype="float32",
+            dtype="float64",
             checks=[
                 Check.greater_than_or_equal_to(
                     min_value=0,
@@ -54,14 +54,14 @@ price_schema = DataFrameSchema(
             ],
             nullable=False,
             unique=False,
-            coerce=False,
+            coerce=True,
             required=True,
             regex=False,
             description=None,
             title=None,
         ),
         "high": Column(
-            dtype="float32",
+            dtype="float64",
             checks=[
                 Check.greater_than_or_equal_to(
                     min_value=0,
@@ -71,14 +71,14 @@ price_schema = DataFrameSchema(
             ],
             nullable=False,
             unique=False,
-            coerce=False,
+            coerce=True,
             required=True,
             regex=False,
             description=None,
             title=None,
         ),
         "low": Column(
-            dtype="float32",
+            dtype="float64",
             checks=[
                 Check.greater_than_or_equal_to(
                     min_value=0,
@@ -88,14 +88,14 @@ price_schema = DataFrameSchema(
             ],
             nullable=False,
             unique=False,
-            coerce=False,
+            coerce=True,
             required=True,
             regex=False,
             description=None,
             title=None,
         ),
         "close": Column(
-            dtype="float32",
+            dtype="float64",
             checks=[
                 Check.greater_than_or_equal_to(
                     min_value=0,
@@ -105,7 +105,7 @@ price_schema = DataFrameSchema(
             ],
             nullable=False,
             unique=False,
-            coerce=False,
+            coerce=True,
             required=True,
             regex=False,
             description=None,
@@ -122,14 +122,14 @@ price_schema = DataFrameSchema(
             ],
             nullable=False,
             unique=False,
-            coerce=False,
+            coerce=True,
             required=True,
             regex=False,
             description=None,
             title=None,
         ),
         "dividends": Column(
-            dtype="float32",
+            dtype="float64",
             checks=[
                 Check.greater_than_or_equal_to(
                     min_value=0,
@@ -139,14 +139,14 @@ price_schema = DataFrameSchema(
             ],
             nullable=False,
             unique=False,
-            coerce=False,
+            coerce=True,
             required=True,
             regex=False,
             description=None,
             title=None,
         ),
         "stock_splits": Column(
-            dtype="float32",
+            dtype="float64",
             checks=[
                 Check.greater_than_or_equal_to(
                     min_value=0,
@@ -156,7 +156,7 @@ price_schema = DataFrameSchema(
             ],
             nullable=True,
             unique=False,
-            coerce=False,
+            coerce=True,
             required=True,
             regex=False,
             description=None,
@@ -168,7 +168,7 @@ price_schema = DataFrameSchema(
         dtype="int64",
         checks=None,
         nullable=False,
-        coerce=False,
+        coerce=True,
         name=None,
         description=None,
         title=None,

@@ -1,11 +1,12 @@
 from pandas import DataFrame, Series, concat
 from functools import reduce
 import talib as ta
+from tqdm.auto import tqdm
 
 from stock_downloader.utilities import downcast_numeric_columns
 
 
-def run_talib_functions(df: DataFrame, talib_functions: list[dict], pattern_columns: list[str]) -> DataFrame:
+def run_talib_functions(df: DataFrame, functions: list[dict], pattern_columns: list[str]) -> DataFrame:
     # Store each function's result dataframe
 
     input_map = {
@@ -19,7 +20,7 @@ def run_talib_functions(df: DataFrame, talib_functions: list[dict], pattern_colu
 
     results = []
 
-    for function_set in talib_functions:
+    for function_set in functions:
         func_name = list(function_set.keys())[0]
         params = function_set.get(func_name)
 
@@ -86,11 +87,11 @@ def run_talib_functions(df: DataFrame, talib_functions: list[dict], pattern_colu
     return final_df.dropna(how="all", axis=1)  # .dropna(how='any', axis=0)
 
 
-def run_custom_ta(df: DataFrame, custom_ta: list[dict]) -> DataFrame:
+def run_custom_ta(df: DataFrame, functions: list[dict]) -> DataFrame:
     # Store each function's result dataframe
     results = []
 
-    for function_set in custom_ta:
+    for function_set in functions:
         output_name = function_set.get("output")
         func = function_set.get("func")
         args = {k: df[v] for k, v in function_set.get("columns").items()}
@@ -124,3 +125,15 @@ def concatenate_ta_results(dfs: list[DataFrame], symbol_col: str = "symbol", dat
     df = concat(dfs, axis=0).sort_values([symbol_col, date_col]).reset_index(drop=False)
     df = downcast_numeric_columns(df)
     return df
+
+
+def run_all_talib(data_df: DataFrame, functions: list[dict], pattern_columns: list[str]) -> DataFrame:
+    results = [
+        run_talib_functions(df=df[1], functions=functions, pattern_columns=pattern_columns) for df in tqdm(data_df.groupby("symbol"))
+    ]
+    return concatenate_ta_results([i for i in results if i is not None])
+
+
+def run_all_custom_ta(data_df: DataFrame, functions: list[dict]) -> DataFrame:
+    results = [run_custom_ta(df=df[1], functions=functions) for df in tqdm(data_df.groupby("symbol"))]
+    return concatenate_ta_results([i for i in results if i is not None])

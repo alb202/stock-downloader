@@ -1,4 +1,5 @@
-from pandas import to_numeric
+from pandas import to_numeric, DataFrame
+from pathlib import Path
 
 
 def downcast_numeric_columns(df):
@@ -26,3 +27,13 @@ def camel_to_snake(text):
         else:
             snake_case_text += char
     return snake_case_text
+
+
+def validate_folder(path: str, exist_ok: bool = True, parents: bool = True) -> Path:
+    path_ = Path(path)
+    path_.mkdir(exist_ok=exist_ok, parents=parents)
+    return path_
+
+
+def rename_and_select_columns(df: DataFrame, mappings: dict) -> DataFrame:
+    return df.loc[:, mappings.keys()].rename(columns=mappings)

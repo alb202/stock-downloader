@@ -1,0 +1,12 @@
+["sector_etfs"]
+basic-materials = "VAW"
+communication-services = "VOX"
+consumer-cyclical = "VCR"
+consumer-defensive = "VDC"
+energy = "VDE"
+financial-services = "VFH"
+healthcare = "VHT"
+industrials = "VIS"
+real-estate = "VNQ"
+technology = "VGT"
+utilities = "VPU"

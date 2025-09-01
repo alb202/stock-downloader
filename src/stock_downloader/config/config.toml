@@ -4,3 +4,16 @@ database_name = 'stocks'
 
 [data]
 output_folder = "D:/stocks/output/raw_data/"
+
+[regression]
+max_regression_days = 365
+min_regression_days = 10
+date_column = 'Date'
+price_column = 'Close'
+
+[symbols]
+get_etfs = false
+get_sector_etfs = true
+get_dowjones = true
+get_nasdaq100 = true
+get_sp500 = true

@@ -1,4 +1,4 @@
-from pandas import DataFrame, to_datetime, Timestamp, Series
+from pandas import DataFrame, to_datetime, Timestamp, Series, concat
 
 # import json
 # import time
@@ -70,6 +70,8 @@ def get_best_result(
     df: DataFrame,
     symbol: str,
     date: Timestamp,
+    price_column: str = "Close",
+    date_column: str = "Date",
     max_regression_days: int = 365,
     min_regression_days: int = 20,
     lower_deviation: float = 2.0,
@@ -77,12 +79,14 @@ def get_best_result(
 ) -> BestResults:
     start_date = back_in_time(date, days=max_regression_days)
     data = data_between_dates(df=df, start_date=start_date, end_date=date)
-    x_ = data["Date"]
-    y = data["Close"]
+    x_ = data[date_column]
+    y = data[price_column]
     try:
         best_pearson_r = find_best_pearson_r(x=x_, y=y, use_abs=True, min_days=min_regression_days)
         best_start_date = best_pearson_r.date
-        best_result = linear_regression_between_dates(df=data, start=best_start_date, end=date, price_column="Close", date_column="Date")
+        best_result = linear_regression_between_dates(
+            df=data, start=best_start_date, end=date, price_column=price_column, date_column=date_column
+        )
         best_lines = make_regression_lines(result=best_result, lower_deviation=lower_deviation, upper_deviation=upper_deviation)
 
         return BestResults(
@@ -187,14 +191,53 @@ def find_best_pearson_r(
     return BestCorrelation(date=x.iloc[best_idx], corr=best_r)
 
 
+def flatten_regression_results(df: DataFrame) -> DataFrame:
+    return concat(
+        [
+            df.loc[:, ["symbol", "date", "max_regression_days", "earliest_start_date", "best_regression_date"]],
+            df.best_result.apply(Series),
+            df.best_lines.apply(Series),
+        ],
+        axis=1,
+    )
+
+
 def run_regression_for_symbol(
-    symbol: str, df: DataFrame, date_col: str = "Date", max_regression_days: int = 365, min_regression_days: int = 20
+    symbol: str,
+    df: DataFrame,
+    max_regression_days: int = 365,
+    min_regression_days: int = 20,
+    price_column: str = "Close",
+    date_column: str = "Date",
 ) -> None:
     results = []
-    for regression_date in tqdm(df[date_col], desc=f"Processing {symbol}"):
+    for regression_date in tqdm(df[date_column], desc=f"Processing {symbol}"):
         results.append(
             get_best_result(
-                df=df, symbol=symbol, date=regression_date, min_regression_days=min_regression_days, max_regression_days=max_regression_days
+                df=df,
+                symbol=symbol,
+                date=regression_date,
+                min_regression_days=min_regression_days,
+                max_regression_days=max_regression_days,
+                price_column=price_column,
+                date_column=date_column,
             )
         )
-    return DataFrame(results).sort_values(["symbol", "date"], ascending=[True, False]).dropna(axis=0, subset=["best_regression_date"])
+    df = DataFrame(results).sort_values(["symbol", "date"], ascending=[True, False]).dropna(axis=0, subset=["best_regression_date"])
+    return flatten_regression_results(df=df)
+
+
+def run_all_regression(price_df: DataFrame, regression_config: dict) -> DataFrame:
+    # Compute regression channels
+    results = [
+        run_regression_for_symbol(
+            date_column=regression_config.get("date_column"),
+            price_column=regression_config.get("price_column"),
+            symbol=df[0],
+            df=df[1],
+            min_regression_days=regression_config.get("min_regression_days"),
+            max_regression_days=regression_config.get("max_regression_days"),
+        )
+        for df in tqdm(price_df.groupby("symbol"), desc="Regression")
+    ]
+    return concat([df for df in results if df is not None])
