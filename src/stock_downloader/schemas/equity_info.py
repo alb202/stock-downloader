@@ -186,7 +186,7 @@ equity_info_schema = DataFrameSchema(
             title=None,
         ),
         "audit_risk": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
@@ -197,7 +197,7 @@ equity_info_schema = DataFrameSchema(
             title=None,
         ),
         "board_risk": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
@@ -208,7 +208,7 @@ equity_info_schema = DataFrameSchema(
             title=None,
         ),
         "compensation_risk": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
@@ -219,7 +219,7 @@ equity_info_schema = DataFrameSchema(
             title=None,
         ),
         "share_holder_rights_risk": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
@@ -230,7 +230,7 @@ equity_info_schema = DataFrameSchema(
             title=None,
         ),
         "overall_risk": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
@@ -296,7 +296,7 @@ equity_info_schema = DataFrameSchema(
             title=None,
         ),
         "price_hint": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
@@ -560,7 +560,7 @@ equity_info_schema = DataFrameSchema(
             title=None,
         ),
         "bid_size": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
@@ -571,7 +571,7 @@ equity_info_schema = DataFrameSchema(
             title=None,
         ),
         "ask_size": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
@@ -1121,7 +1121,7 @@ equity_info_schema = DataFrameSchema(
             title=None,
         ),
         "number_of_analyst_opinions": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
@@ -1880,7 +1880,7 @@ equity_info_schema = DataFrameSchema(
             title=None,
         ),
         "source_interval": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
@@ -1891,7 +1891,7 @@ equity_info_schema = DataFrameSchema(
             title=None,
         ),
         "exchange_data_delayed_by": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,

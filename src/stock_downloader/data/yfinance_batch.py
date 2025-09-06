@@ -7,12 +7,14 @@ import json
 import time
 from tqdm.auto import tqdm
 import os
+import uuid
+
 from stock_downloader.utilities import downcast_numeric_columns
 
 
 class YahooFinanceBatchDownloader:
     RETRY_TIME: int = 20  # seconds
-    TEMP_FILE: str = "DOWNLOADER_TEMP.txt"
+    TEMP_FILE_SUFFIX: str = "txt"
     # PARQUET_FILE: str = 'yahoo_info.parquet'
 
     def __init__(
@@ -24,7 +26,7 @@ class YahooFinanceBatchDownloader:
         delete_temp: bool = True,
     ) -> None:
         self.symbols = symbols
-        self.temp_file = Path(path) / self.TEMP_FILE
+        self.temp_file = Path(path) / self.make_temp_filename()
         # self.filename = filename
         self.cls = cls
 
@@ -39,6 +41,9 @@ class YahooFinanceBatchDownloader:
 
         if delete_temp:
             self._delete_temp_file()
+
+    def make_temp_filename(self) -> str:
+        return f"{str(uuid.uuid4())}.{self.TEMP_FILE_SUFFIX}"
 
     def __call__(self) -> DataFrame:
         return self.data

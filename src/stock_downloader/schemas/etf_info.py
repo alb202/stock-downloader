@@ -56,7 +56,7 @@ etf_info_schema = DataFrameSchema(
         "max_age": Column(
             dtype="Int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -65,9 +65,9 @@ etf_info_schema = DataFrameSchema(
             title=None,
         ),
         "price_hint": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -78,7 +78,7 @@ etf_info_schema = DataFrameSchema(
         "previous_close": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -89,7 +89,7 @@ etf_info_schema = DataFrameSchema(
         "open": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -100,7 +100,7 @@ etf_info_schema = DataFrameSchema(
         "day_low": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -111,7 +111,7 @@ etf_info_schema = DataFrameSchema(
         "day_high": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -122,7 +122,7 @@ etf_info_schema = DataFrameSchema(
         "regular_market_previous_close": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -133,7 +133,7 @@ etf_info_schema = DataFrameSchema(
         "regular_market_open": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -144,7 +144,7 @@ etf_info_schema = DataFrameSchema(
         "regular_market_day_low": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -155,7 +155,7 @@ etf_info_schema = DataFrameSchema(
         "regular_market_day_high": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -163,7 +163,7 @@ etf_info_schema = DataFrameSchema(
             description=None,
             title=None,
         ),
-        "trailing_p_e": Column(
+        "trailing_pe": Column(
             dtype="float32",
             checks=None,
             nullable=True,
@@ -177,7 +177,7 @@ etf_info_schema = DataFrameSchema(
         "volume": Column(
             dtype="Int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -188,7 +188,7 @@ etf_info_schema = DataFrameSchema(
         "regular_market_volume": Column(
             dtype="Int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -199,7 +199,7 @@ etf_info_schema = DataFrameSchema(
         "average_volume": Column(
             dtype="Int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -210,7 +210,7 @@ etf_info_schema = DataFrameSchema(
         "average_volume10days": Column(
             dtype="Int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -221,7 +221,7 @@ etf_info_schema = DataFrameSchema(
         "average_daily_volume10_day": Column(
             dtype="Int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -298,7 +298,7 @@ etf_info_schema = DataFrameSchema(
         "fifty_two_week_low": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -309,7 +309,7 @@ etf_info_schema = DataFrameSchema(
         "fifty_two_week_high": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -320,7 +320,7 @@ etf_info_schema = DataFrameSchema(
         "fifty_day_average": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -331,7 +331,7 @@ etf_info_schema = DataFrameSchema(
         "two_hundred_day_average": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -353,7 +353,7 @@ etf_info_schema = DataFrameSchema(
         "currency": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -364,7 +364,7 @@ etf_info_schema = DataFrameSchema(
         "tradeable": Column(
             dtype="bool",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -441,7 +441,7 @@ etf_info_schema = DataFrameSchema(
         "quote_type": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -452,7 +452,7 @@ etf_info_schema = DataFrameSchema(
         "language": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -463,7 +463,7 @@ etf_info_schema = DataFrameSchema(
         "region": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -474,18 +474,7 @@ etf_info_schema = DataFrameSchema(
         "type_disp": Column(
             dtype="object",
             checks=None,
-            nullable=False,
-            unique=False,
-            coerce=True,
-            required=False,
-            regex=False,
-            description=None,
-            title=None,
-        ),
-        "quote_source_name": Column(
-            dtype="object",
-            checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -496,7 +485,7 @@ etf_info_schema = DataFrameSchema(
         "triggerable": Column(
             dtype="bool",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -507,7 +496,7 @@ etf_info_schema = DataFrameSchema(
         "custom_price_alert_confidence": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -518,7 +507,7 @@ etf_info_schema = DataFrameSchema(
         "corporate_actions": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -540,7 +529,7 @@ etf_info_schema = DataFrameSchema(
         "regular_market_time": Column(
             dtype="Int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -551,7 +540,7 @@ etf_info_schema = DataFrameSchema(
         "exchange": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -562,7 +551,7 @@ etf_info_schema = DataFrameSchema(
         "message_board_id": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -573,7 +562,7 @@ etf_info_schema = DataFrameSchema(
         "exchange_timezone_name": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -584,7 +573,7 @@ etf_info_schema = DataFrameSchema(
         "exchange_timezone_short_name": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -595,7 +584,7 @@ etf_info_schema = DataFrameSchema(
         "gmt_off_set_milliseconds": Column(
             dtype="Int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -606,7 +595,7 @@ etf_info_schema = DataFrameSchema(
         "market": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -617,7 +606,7 @@ etf_info_schema = DataFrameSchema(
         "esg_populated": Column(
             dtype="bool",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -628,7 +617,7 @@ etf_info_schema = DataFrameSchema(
         "short_name": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -639,7 +628,7 @@ etf_info_schema = DataFrameSchema(
         "long_name": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -650,7 +639,7 @@ etf_info_schema = DataFrameSchema(
         "has_pre_post_market_data": Column(
             dtype="bool",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -661,7 +650,7 @@ etf_info_schema = DataFrameSchema(
         "first_trade_date_milliseconds": Column(
             dtype="int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -705,7 +694,7 @@ etf_info_schema = DataFrameSchema(
         "regular_market_change": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -716,7 +705,7 @@ etf_info_schema = DataFrameSchema(
         "regular_market_day_range": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -727,7 +716,7 @@ etf_info_schema = DataFrameSchema(
         "full_exchange_name": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -738,7 +727,7 @@ etf_info_schema = DataFrameSchema(
         "average_daily_volume3_month": Column(
             dtype="Int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -749,7 +738,7 @@ etf_info_schema = DataFrameSchema(
         "fifty_two_week_low_change": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -760,7 +749,7 @@ etf_info_schema = DataFrameSchema(
         "fifty_two_week_low_change_percent": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -771,7 +760,7 @@ etf_info_schema = DataFrameSchema(
         "fifty_two_week_range": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -782,7 +771,7 @@ etf_info_schema = DataFrameSchema(
         "fifty_two_week_high_change": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -793,7 +782,7 @@ etf_info_schema = DataFrameSchema(
         "fifty_two_week_high_change_percent": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -804,7 +793,7 @@ etf_info_schema = DataFrameSchema(
         "fifty_two_week_change_percent": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -870,7 +859,7 @@ etf_info_schema = DataFrameSchema(
         "fifty_day_average_change": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -881,7 +870,7 @@ etf_info_schema = DataFrameSchema(
         "fifty_day_average_change_percent": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -892,7 +881,7 @@ etf_info_schema = DataFrameSchema(
         "two_hundred_day_average_change": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -903,7 +892,7 @@ etf_info_schema = DataFrameSchema(
         "two_hundred_day_average_change_percent": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -923,9 +912,9 @@ etf_info_schema = DataFrameSchema(
             title=None,
         ),
         "source_interval": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -934,9 +923,9 @@ etf_info_schema = DataFrameSchema(
             title=None,
         ),
         "exchange_data_delayed_by": Column(
-            dtype="int8",
+            dtype="Int64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -947,7 +936,7 @@ etf_info_schema = DataFrameSchema(
         "crypto_tradeable": Column(
             dtype="bool",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -958,7 +947,7 @@ etf_info_schema = DataFrameSchema(
         "regular_market_change_percent": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -969,7 +958,7 @@ etf_info_schema = DataFrameSchema(
         "regular_market_price": Column(
             dtype="float32",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -980,7 +969,7 @@ etf_info_schema = DataFrameSchema(
         "market_state": Column(
             dtype="object",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=False,
@@ -996,7 +985,7 @@ etf_info_schema = DataFrameSchema(
             Check.greater_than_or_equal_to(min_value=0.0, raise_warning=False, ignore_na=True),
             Check.less_than_or_equal_to(max_value=99.0, raise_warning=False, ignore_na=True),
         ],
-        nullable=False,
+        nullable=True,
         coerce=True,
         name=None,
         description=None,

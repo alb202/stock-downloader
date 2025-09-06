@@ -27,7 +27,7 @@ regression_schema = DataFrameSchema(
                 Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True),
                 Check.less_than_or_equal_to(max_value=10000, raise_warning=False, ignore_na=True),
             ],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -71,7 +71,7 @@ regression_schema = DataFrameSchema(
                     ignore_na=True,
                 ),
             ],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -93,7 +93,7 @@ regression_schema = DataFrameSchema(
                     ignore_na=True,
                 ),
             ],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -115,7 +115,7 @@ regression_schema = DataFrameSchema(
                     ignore_na=True,
                 ),
             ],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -137,7 +137,7 @@ regression_schema = DataFrameSchema(
                     ignore_na=True,
                 ),
             ],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -151,7 +151,7 @@ regression_schema = DataFrameSchema(
                 Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True),
                 Check.less_than_or_equal_to(max_value=10000, raise_warning=False, ignore_na=True),
             ],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -162,7 +162,7 @@ regression_schema = DataFrameSchema(
         "start_ordinal": Column(
             dtype="int64",
             checks=[Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True)],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -173,7 +173,7 @@ regression_schema = DataFrameSchema(
         "end_ordinal": Column(
             dtype="int64",
             checks=[Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True)],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -184,7 +184,7 @@ regression_schema = DataFrameSchema(
         "slope": Column(
             dtype="float64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -195,7 +195,7 @@ regression_schema = DataFrameSchema(
         "intercept": Column(
             dtype="float64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -217,7 +217,7 @@ regression_schema = DataFrameSchema(
                     ignore_na=True,
                 ),
             ],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -239,7 +239,7 @@ regression_schema = DataFrameSchema(
                     ignore_na=True,
                 ),
             ],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -256,7 +256,7 @@ regression_schema = DataFrameSchema(
                     ignore_na=True,
                 )
             ],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -267,7 +267,7 @@ regression_schema = DataFrameSchema(
         "stderr": Column(
             dtype="float64",
             checks=None,
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -278,7 +278,7 @@ regression_schema = DataFrameSchema(
         "line_start_ordinal_x": Column(
             dtype="int64",
             checks=[Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True)],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -289,7 +289,7 @@ regression_schema = DataFrameSchema(
         "line_end_ordinal_x": Column(
             dtype="int64",
             checks=[Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True)],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -311,7 +311,7 @@ regression_schema = DataFrameSchema(
                     ignore_na=True,
                 ),
             ],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -333,7 +333,7 @@ regression_schema = DataFrameSchema(
                     ignore_na=True,
                 ),
             ],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -343,14 +343,8 @@ regression_schema = DataFrameSchema(
         ),
         "line_start_y": Column(
             dtype="float64",
-            checks=[
-                Check.greater_than_or_equal_to(
-                    min_value=0,
-                    raise_warning=False,
-                    ignore_na=True,
-                )
-            ],
-            nullable=False,
+            checks=None,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -360,14 +354,8 @@ regression_schema = DataFrameSchema(
         ),
         "line_end_y": Column(
             dtype="float64",
-            checks=[
-                Check.greater_than_or_equal_to(
-                    min_value=0,
-                    raise_warning=False,
-                    ignore_na=True,
-                )
-            ],
-            nullable=False,
+            checks=None,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -377,14 +365,8 @@ regression_schema = DataFrameSchema(
         ),
         "line_plus_start_y": Column(
             dtype="float64",
-            checks=[
-                Check.greater_than_or_equal_to(
-                    min_value=0,
-                    raise_warning=False,
-                    ignore_na=True,
-                )
-            ],
-            nullable=False,
+            checks=None,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -394,14 +376,8 @@ regression_schema = DataFrameSchema(
         ),
         "line_plus_end_y": Column(
             dtype="float64",
-            checks=[
-                Check.greater_than_or_equal_to(
-                    min_value=0,
-                    raise_warning=False,
-                    ignore_na=True,
-                )
-            ],
-            nullable=False,
+            checks=None,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -411,14 +387,8 @@ regression_schema = DataFrameSchema(
         ),
         "line_minus_start_y": Column(
             dtype="float64",
-            checks=[
-                Check.greater_than_or_equal_to(
-                    min_value=0,
-                    raise_warning=False,
-                    ignore_na=True,
-                )
-            ],
-            nullable=False,
+            checks=None,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,
@@ -428,14 +398,8 @@ regression_schema = DataFrameSchema(
         ),
         "line_minus_end_y": Column(
             dtype="float64",
-            checks=[
-                Check.greater_than_or_equal_to(
-                    min_value=0,
-                    raise_warning=False,
-                    ignore_na=True,
-                )
-            ],
-            nullable=False,
+            checks=None,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,

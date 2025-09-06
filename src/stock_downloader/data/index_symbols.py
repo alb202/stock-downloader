@@ -34,11 +34,15 @@ class GetIndexSymbols:
         self.nasdaq100_df = self.get_table(self.INDEX_LIST["nasdaq100"]["url"], self.INDEX_LIST["nasdaq100"]["table_index"]).rename(
             columns=self.COLUMN_RENAME.get("nasdaq100")
         )
-        self.df = (
+        self.df = self.merge_tables()
+
+    def merge_tables(self) -> DataFrame:
+        return (
             self.dowjones_df.loc[:, ["symbol"]]
             .assign(dowjones=True)
             .merge(self.nasdaq100_df.loc[:, ["symbol"]].assign(nasdaq100=True), how="outer", on="symbol")
             .merge(self.sp500_df.loc[:, ["symbol"]].assign(sp500=True), how="outer", on="symbol")
+            .fillna(False)
         )
 
     def save_data(self, path: str | PosixPath | WindowsPath) -> None:

@@ -36,4 +36,4 @@ def validate_folder(path: str, exist_ok: bool = True, parents: bool = True) -> P
 
 
 def rename_and_select_columns(df: DataFrame, mappings: dict) -> DataFrame:
-    return df.loc[:, mappings.keys()].rename(columns=mappings)
+    return df.loc[:, [col for col in df.columns if col in mappings.keys()]].rename(columns=mappings)

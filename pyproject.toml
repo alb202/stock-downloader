@@ -34,6 +34,7 @@ dependencies = [
     "dagster-cloud-cli==1.11.6",
     "dagster-dg-cli==1.11.6",
     "dagster-dg-core==1.11.6",
+    "dagster-duckdb>=0.27.6",
     "dagster-graphql==1.11.6",
     "dagster-pipes==1.11.6",
     "dagster-shared==1.11.6",
@@ -189,4 +190,15 @@ build-backend = "hatchling.build"
 packages = ["src/stock_downloader"]
 
 [tool.uv.sources]
-ta-lib = { path = "../../../Downloads/ta_lib-0.6.4-cp313-cp313-win_amd64.whl" }
+ta-lib = { path = "talib/ta_lib-0.6.4-cp313-cp313-win_amd64.whl" }
+
+[tool.dg]
+directory_type = "project"
+
+[tool.dg.project]
+root_module = "workflow_manager"
+registry_modules = [
+    "workflow_manager.components.*",
+]
+
+

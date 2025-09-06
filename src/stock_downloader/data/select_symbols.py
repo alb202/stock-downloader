@@ -1,5 +1,5 @@
 from pandas import DataFrame, concat
-
+from dataclasses import dataclass
 # symbols = sorted(
 #     set(nasdaq_symbols_df.query('ETF == "N"')["symbol"].to_list() + other_symbols_df.query('ETF == "Y"')["symbol"].to_list())
 # )
@@ -9,6 +9,12 @@ from pandas import DataFrame, concat
 #     for symbol in symbols
 #     if symbol in index_symbols.df.query("sp500 == True | dowjones == False | nasdaq100 == False")["symbol"].to_list() + sector_etfs
 # ][:100]
+
+
+@dataclass
+class symbolLists:
+    equity: list
+    etf: list
 
 
 def select_symbols(
@@ -22,7 +28,7 @@ def select_symbols(
     get_dowjones: bool = False,
     get_nasdaq100: bool = False,
     sample: int | float = None,
-) -> tuple[list, list]:
+) -> symbolLists:
     equity_symbol_list: list = []
     etf_symbol_list: list = []
     symbols_df: DataFrame = concat([nasdaq_df, other_df], axis=0).merge(indicies_df, how="left", on="symbol")
@@ -41,5 +47,5 @@ def select_symbols(
     equity_symbols: list = concat(equity_symbol_list, axis=0).sort_values().drop_duplicates().to_list()
     etf_symbols: list = concat(etf_symbol_list, axis=0).sort_values().drop_duplicates().to_list()
     if sample:
-        return equity_symbols[:sample], etf_symbols[:sample]
-    return equity_symbols, etf_symbols
+        return symbolLists(equity=equity_symbols[:sample], etf=etf_symbols[:sample])
+    return symbolLists(equity=equity_symbols, etf=etf_symbols)

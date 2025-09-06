@@ -37,7 +37,7 @@ from stock_downloader.schemas.regression_indicators_ma import regression_indicat
 from stock_downloader.schemas.ma_future import ma_future_schema
 
 from stock_downloader.data.loaders import load_mappings, load_config
-from stock_downloader.data.select_symbols import select_symbols
+from stock_downloader.data.select_symbols import select_symbols, symbolLists
 
 import duckdb
 from loguru import logger
@@ -81,7 +81,7 @@ def main():
     sector_etfs = load_mappings(name="sector_etfs").get("sector_etfs")
 
     logger.info("Create the equity and etf symbol lists")
-    equity_symbols, etf_symbols = select_symbols(
+    symbol_lists: symbolLists = select_symbols(
         nasdaq_df=nasdaq_symbols_df,
         other_df=other_symbols_df,
         sector_etfs=sector_etfs,
@@ -91,19 +91,19 @@ def main():
         get_dowjones=config.get("symbols").get("get_dowjones"),
         get_nasdaq100=config.get("symbols").get("get_nasdaq100"),
         get_sp500=config.get("symbols").get("get_sp500"),
-        sample=25,
+        sample=10,
     )
 
     logger.info("Create the list of symbols to process")
-    all_symbols = sorted(set(equity_symbols + etf_symbols))
+    all_symbols = sorted(set(symbol_lists.equity + symbol_lists.etf))
 
-    logger.info(f"Equity symbols to process: {len(equity_symbols)}")
-    logger.info(f"ETF symbols to process: {len(etf_symbols)}")
+    logger.info(f"Equity symbols to process: {len(symbol_lists.equity)}")
+    logger.info(f"ETF symbols to process: {len(symbol_lists.etf)}")
     logger.info(f"Total symbols to process: {len(all_symbols)}")
 
     logger.info("Use yfinance to get the info and price data for all symbols")
-    equity_info = YahooFinanceBatchDownloader(symbols=equity_symbols, path=output_folder, cls=YahooFinanceTickerInfo)
-    etf_info = YahooFinanceBatchDownloader(symbols=etf_symbols, path=output_folder, cls=YahooFinanceTickerInfo)
+    equity_info = YahooFinanceBatchDownloader(symbols=symbol_lists.equity, path=output_folder, cls=YahooFinanceTickerInfo)
+    etf_info = YahooFinanceBatchDownloader(symbols=symbol_lists.etf, path=output_folder, cls=YahooFinanceTickerInfo)
     all_price = YahooFinanceBatchDownloader(symbols=all_symbols, path=output_folder, cls=YahooFinancePriceHistory)
 
     logger.info("Save equity and etf info and price tables to temporary files")
@@ -122,7 +122,10 @@ def main():
     talib__df.to_parquet(output_folder / "ta_talib.parquet")
 
     logger.info("Calculate custom talib moving averages")
-    ta__ma_ratio__df = run_all_custom_ta(data_df=talib__df, functions=custom_ta_sets__ma_ratio)
+    ta__ma_ratio__df = run_all_custom_ta(
+        data_df=price_df.merge(talib__df.rename(columns={"date": "Date"}), on=["symbol", "Date"], how="inner"),
+        functions=custom_ta_sets__ma_ratio,
+    )
     ta__ma_ratio__df.to_parquet(output_folder / "ta__ma_ratio.parquet", index=False)
 
     logger.info("Calculate price change values")
