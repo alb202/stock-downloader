@@ -77,6 +77,7 @@ talib_functions = [
     {"WILLR": {"high": "high", "low": "low", "close": "close", "timeperiod": 30}},
     {"BBANDS": {"real": "close", "timeperiod": 30, "nbdevup": 2, "nbdevdn": 2, "matype": 0}},
     {"DEMA": {"real": "close", "timeperiod": 30}},
+    {"EMA": {"real": "close", "timeperiod": 7}},
     {"EMA": {"real": "close", "timeperiod": 14}},
     {"EMA": {"real": "close", "timeperiod": 30}},
     {"EMA": {"real": "close", "timeperiod": 50}},
@@ -108,6 +109,7 @@ talib_functions = [
             "accelerationmaxshort": 0,
         }
     },
+    {"SMA": {"real": "close", "timeperiod": 7}},
     {"SMA": {"real": "close", "timeperiod": 14}},
     {"SMA": {"real": "close", "timeperiod": 30}},
     {"SMA": {"real": "close", "timeperiod": 50}},
@@ -116,6 +118,7 @@ talib_functions = [
     {"T3": {"real": "close", "timeperiod": 30, "vfactor": 0}},
     {"TEMA": {"real": "close", "timeperiod": 30}},
     {"TRIMA": {"real": "close", "timeperiod": 30}},
+    {"WMA": {"real": "close", "timeperiod": 7}},
     {"WMA": {"real": "close", "timeperiod": 14}},
     {"WMA": {"real": "close", "timeperiod": 30}},
     {"WMA": {"real": "close", "timeperiod": 50}},
@@ -216,6 +219,31 @@ talib_functions = [
 # Indicators derived from the TA-Lib indicators
 custom_ta_sets__ma_ratio = [
     {
+        "output": "SMA_RATIO_7_14",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "SMA_14", "col2": "SMA_30"},
+    },
+    {
+        "output": "SMA_RATIO_7_30",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "SMA_14", "col2": "SMA_30"},
+    },
+    {
+        "output": "SMA_RATIO_7_50",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "SMA_14", "col2": "SMA_50"},
+    },
+    {
+        "output": "SMA_RATIO_7_100",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "SMA_14", "col2": "SMA_100"},
+    },
+    {
+        "output": "SMA_RATIO_7_200",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "SMA_14", "col2": "SMA_200"},
+    },
+    {
         "output": "SMA_RATIO_14_30",
         "func": lambda col1, col2: col1 / col2,
         "columns": {"col1": "SMA_14", "col2": "SMA_30"},
@@ -264,6 +292,31 @@ custom_ta_sets__ma_ratio = [
         "output": "SMA_RATIO_100_200",
         "func": lambda col1, col2: col1 / col2,
         "columns": {"col1": "SMA_100", "col2": "SMA_200"},
+    },
+    {
+        "output": "EMA_RATIO_7_14",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "EMA_14", "col2": "EMA_30"},
+    },
+    {
+        "output": "EMA_RATIO_7_30",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "EMA_14", "col2": "EMA_30"},
+    },
+    {
+        "output": "EMA_RATIO_7_50",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "EMA_14", "col2": "EMA_50"},
+    },
+    {
+        "output": "EMA_RATIO_7_100",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "EMA_14", "col2": "EMA_100"},
+    },
+    {
+        "output": "EMA_RATIO_7_200",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "EMA_14", "col2": "EMA_200"},
     },
     {
         "output": "EMA_RATIO_14_30",
@@ -339,6 +392,96 @@ custom_ta_sets__ma_ratio = [
         "output": "LINEARREG_400_ZSCORE",
         "func": lambda col1, col2, col3: (col1 - col2) / col3,
         "columns": {"col1": "Close", "col2": "LINEARREG_400", "col3": "STDDEV_400_1"},
+    },
+    {
+        "output": "CLOSE_SMA_7_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "SMA_7"},
+    },
+    {
+        "output": "CLOSE_SMA_14_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "SMA_14"},
+    },
+    {
+        "output": "CLOSE_SMA_30_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "SMA_30"},
+    },
+    {
+        "output": "CLOSE_SMA_50_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "SMA_50"},
+    },
+    {
+        "output": "CLOSE_SMA_100_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "SMA_100"},
+    },
+    {
+        "output": "CLOSE_SMA_200_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "SMA_200"},
+    },
+    {
+        "output": "CLOSE_EMA_7_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "EMA_7"},
+    },
+    {
+        "output": "CLOSE_EMA_14_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "EMA_14"},
+    },
+    {
+        "output": "CLOSE_EMA_30_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "EMA_30"},
+    },
+    {
+        "output": "CLOSE_EMA_50_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "EMA_50"},
+    },
+    {
+        "output": "CLOSE_EMA_100_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "EMA_100"},
+    },
+    {
+        "output": "CLOSE_EMA_200_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "EMA_200"},
+    },
+    {
+        "output": "CLOSE_OPEN_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "Open"},
+    },
+    {
+        "output": "CLOSE_HIGH_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "High"},
+    },
+    {
+        "output": "CLOSE_LOW_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Close", "col2": "Low"},
+    },
+    {
+        "output": "OPEN_HIGH_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Open", "col2": "High"},
+    },
+    {
+        "output": "OPEN_LOW_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "Open", "col2": "Low"},
+    },
+    {
+        "output": "HIGH_LOW_RATIO",
+        "func": lambda col1, col2: col1 / col2,
+        "columns": {"col1": "High", "col2": "Low"},
     },
 ]
 
