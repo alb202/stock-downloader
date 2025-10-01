@@ -1,0 +1,24 @@
+["sector_etfs"]
+basic-materials = "VAW"
+communication-services = "VOX"
+consumer-cyclical = "VCR"
+consumer-defensive = "VDC"
+energy = "VDE"
+financial-services = "VFH"
+healthcare = "VHT"
+industrials = "VIS"
+real-estate = "VNQ"
+technology = "VGT"
+utilities = "VPU"
+
+["market_etfs"]
+sp500 = "SPY"
+nasdaq = "QQQ"
+
+["technical_etfs"]
+vix_midterm_futures = "VIXM"
+vix_shortterm_futures = "VIXY"
+
+["indicies"]
+volatility = "^VIX"
+volatility_2 = "^VVIX"
