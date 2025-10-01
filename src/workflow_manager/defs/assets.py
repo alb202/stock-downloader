@@ -79,20 +79,44 @@ def sector_etfs_asset() -> dict:
 
 
 @dg.asset(tags={"domain": "symbols"})
+def market_etfs_asset() -> dict:
+    return load_mappings(name="other_symbols").get("market_etfs")
+
+
+@dg.asset(tags={"domain": "symbols"})
+def technical_etfs_asset() -> dict:
+    return load_mappings(name="other_symbols").get("technical_etfs")
+
+
+@dg.asset(tags={"domain": "symbols"})
+def indicies_asset() -> dict:
+    return load_mappings(name="other_symbols").get("indicies")
+
+
+@dg.asset(tags={"domain": "symbols"})
 def select_symbols_asset(
     config_asset: dict,
     nasdaq_symbols_asset: DataFrame,
     other_stock_symbols_asset: DataFrame,
     sector_etfs_asset: dict,
+    market_etfs_asset: dict,
+    technical_etfs_asset: dict,
+    indicies_asset: dict,
     index_symbols_asset: DataFrame,
 ) -> symbolLists:
     return select_symbols(
         nasdaq_df=nasdaq_symbols_asset,
         other_df=other_stock_symbols_asset,
         sector_etfs=sector_etfs_asset,
-        indicies_df=index_symbols_asset,
+        market_etfs=market_etfs_asset,
+        technical_etfs=technical_etfs_asset,
+        indicies=indicies_asset,
+        index_symbols_df=index_symbols_asset,
         get_etfs=config_asset.get("symbols").get("get_etfs"),
+        get_market_etfs=config_asset.get("symbols").get("get_market_etfs"),
         get_sector_etfs=config_asset.get("symbols").get("get_sector_etfs"),
+        get_technical_etfs=config_asset.get("symbols").get("get_technical_etfs"),
+        get_indicies=config_asset.get("symbols").get("get_indicies"),
         get_dowjones=config_asset.get("symbols").get("get_dowjones"),
         get_nasdaq100=config_asset.get("symbols").get("get_nasdaq100"),
         get_sp500=config_asset.get("symbols").get("get_sp500"),
