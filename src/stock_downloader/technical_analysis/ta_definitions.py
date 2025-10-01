@@ -549,6 +549,20 @@ custom_ta_sets__regression_channel_ma = [
 
 # Indicators derived from the raw price data
 custom_ta_sets__change_ratio = [
+    {"output": "CHANGE_HIGH_1", "func": lambda col1: col1 / col1.shift(1), "columns": {"col1": "High"}},
+    {"output": "CHANGE_HIGH_2", "func": lambda col1: col1 / col1.shift(2), "columns": {"col1": "High"}},
+    {"output": "CHANGE_HIGH_3", "func": lambda col1: col1 / col1.shift(3), "columns": {"col1": "High"}},
+    {"output": "CHANGE_HIGH_4", "func": lambda col1: col1 / col1.shift(4), "columns": {"col1": "High"}},
+    {"output": "CHANGE_HIGH_5", "func": lambda col1: col1 / col1.shift(5), "columns": {"col1": "High"}},
+    {"output": "CHANGE_LOW_1", "func": lambda col1: col1 / col1.shift(1), "columns": {"col1": "Low"}},
+    {"output": "CHANGE_LOW_2", "func": lambda col1: col1 / col1.shift(2), "columns": {"col1": "Low"}},
+    {"output": "CHANGE_LOW_3", "func": lambda col1: col1 / col1.shift(3), "columns": {"col1": "Low"}},
+    {"output": "CHANGE_LOW_4", "func": lambda col1: col1 / col1.shift(4), "columns": {"col1": "Low"}},
+    {"output": "CHANGE_LOW_5", "func": lambda col1: col1 / col1.shift(5), "columns": {"col1": "Low"}},
+    {"output": "CHANGE_CLOSE_1", "func": lambda col1: col1 / col1.shift(1), "columns": {"col1": "Close"}},
+    {"output": "CHANGE_CLOSE_2", "func": lambda col1: col1 / col1.shift(2), "columns": {"col1": "Close"}},
+    {"output": "CHANGE_CLOSE_3", "func": lambda col1: col1 / col1.shift(3), "columns": {"col1": "Close"}},
+    {"output": "CHANGE_CLOSE_4", "func": lambda col1: col1 / col1.shift(4), "columns": {"col1": "Close"}},
     {"output": "CHANGE_CLOSE_5", "func": lambda col1: col1 / col1.shift(5), "columns": {"col1": "Close"}},
     {"output": "CHANGE_CLOSE_10", "func": lambda col1: col1 / col1.shift(10), "columns": {"col1": "Close"}},
     {"output": "CHANGE_CLOSE_20", "func": lambda col1: col1 / col1.shift(20), "columns": {"col1": "Close"}},

@@ -21,7 +21,7 @@ from stock_downloader.technical_analysis.ta_definitions import (
     custom_ta_sets__regression_channel_ma,
 )
 from stock_downloader.technical_analysis.regression import run_all_regression
-from stock_downloader.database.db import write_table
+from stock_downloader.database.db import write_table, check_database
 from stock_downloader.schemas.indicies import indicies_schema
 from stock_downloader.schemas.equity_info import equity_info_schema
 from stock_downloader.schemas.etf_info import etf_info_schema
@@ -56,6 +56,10 @@ def main():
     output_folder = validate_folder(path=config.get("data").get("output_folder"))
     db_folder = validate_folder(path=config.get("database").get("database_folder"))
 
+    logger.info("Check database connection")
+    if not check_database(db_path=db_folder / f"{config.get('database').get('database_name')}.db"):
+        raise ConnectionError("Unable to connect to the database. Please check the database path and try again.")
+
     logger.info("Retrieve the symbol files")
     nasdaq_symbols_df = NasdaqDownloader().df
     other_symbols_df = StockSymbolDownloader().df
@@ -78,20 +82,29 @@ def main():
     index_symbols_df.to_parquet(output_folder / "index_symbols.parquet")
 
     logger.info("Load the sector ETF mappings")
-    sector_etfs = load_mappings(name="sector_etfs").get("sector_etfs")
+    sector_etfs = load_mappings(name="other_symbols").get("sector_etfs")
+    market_etfs = load_mappings(name="other_symbols").get("market_etfs")
+    technical_etfs = load_mappings(name="other_symbols").get("technical_etfs")
+    indicies = load_mappings(name="other_symbols").get("indicies")
 
     logger.info("Create the equity and etf symbol lists")
     symbol_lists: symbolLists = select_symbols(
         nasdaq_df=nasdaq_symbols_df,
         other_df=other_symbols_df,
         sector_etfs=sector_etfs,
-        indicies_df=index_symbols_df,
+        market_etfs=market_etfs,
+        technical_etfs=technical_etfs,
+        indicies=indicies,
+        index_symbols_df=index_symbols_df,
         get_etfs=config.get("symbols").get("get_etfs"),
+        get_market_etfs=config.get("symbols").get("get_market_etfs"),
         get_sector_etfs=config.get("symbols").get("get_sector_etfs"),
+        get_technical_etfs=config.get("symbols").get("get_technical_etfs"),
+        get_indicies=config.get("symbols").get("get_indicies"),
         get_dowjones=config.get("symbols").get("get_dowjones"),
         get_nasdaq100=config.get("symbols").get("get_nasdaq100"),
         get_sp500=config.get("symbols").get("get_sp500"),
-        sample=10,
+        sample=None,
     )
 
     logger.info("Create the list of symbols to process")

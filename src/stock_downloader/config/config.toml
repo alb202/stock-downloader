@@ -7,7 +7,7 @@ output_folder = "D:/stocks/output/raw_data/"
 temp_folder = "D:/stocks/output/tmp/"
 
 [regression]
-max_regression_days = 365
+max_regression_days = 730
 min_regression_days = 10
 date_column = 'Date'
 price_column = 'Close'
@@ -15,6 +15,9 @@ price_column = 'Close'
 [symbols]
 get_etfs = false
 get_sector_etfs = true
+get_market_etfs = true
+get_technical_etfs = true
+get_indicies = true
 get_dowjones = true
 get_nasdaq100 = false
 get_sp500 = false

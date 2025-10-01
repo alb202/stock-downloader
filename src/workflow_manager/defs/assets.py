@@ -75,7 +75,7 @@ def index_symbols_asset(column_mappings_asset: dict) -> DataFrame:
 
 @dg.asset(tags={"domain": "symbols"})
 def sector_etfs_asset() -> dict:
-    return load_mappings(name="sector_etfs").get("sector_etfs")
+    return load_mappings(name="other_symbols").get("sector_etfs")
 
 
 @dg.asset(tags={"domain": "symbols"})

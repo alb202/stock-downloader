@@ -1,4 +1,4 @@
-from pandas import DataFrame, concat
+from pandas import DataFrame, Series, concat
 from dataclasses import dataclass
 # symbols = sorted(
 #     set(nasdaq_symbols_df.query('ETF == "N"')["symbol"].to_list() + other_symbols_df.query('ETF == "Y"')["symbol"].to_list())
@@ -21,9 +21,15 @@ def select_symbols(
     nasdaq_df: DataFrame,
     other_df: DataFrame,
     sector_etfs: dict,
-    indicies_df: DataFrame,
+    market_etfs: dict,
+    technical_etfs: dict,
+    indicies: dict,
+    index_symbols_df: DataFrame,
     get_etfs: bool = False,
     get_sector_etfs: bool = False,
+    get_market_etfs: bool = False,
+    get_technical_etfs: bool = False,
+    get_indicies: bool = False,
     get_sp500: bool = False,
     get_dowjones: bool = False,
     get_nasdaq100: bool = False,
@@ -31,12 +37,18 @@ def select_symbols(
 ) -> symbolLists:
     equity_symbol_list: list = []
     etf_symbol_list: list = []
-    symbols_df: DataFrame = concat([nasdaq_df, other_df], axis=0).merge(indicies_df, how="left", on="symbol")
+    symbols_df: DataFrame = concat([nasdaq_df, other_df], axis=0).merge(index_symbols_df, how="left", on="symbol")
 
     if get_etfs:
         etf_symbol_list.append(symbols_df.query('etf == "Y"').symbol)
     if get_sector_etfs:
         etf_symbol_list.append(symbols_df.loc[symbols_df["symbol"].isin(sector_etfs.values())].query('etf == "Y"').symbol)
+    if get_market_etfs:
+        etf_symbol_list.append(symbols_df.loc[symbols_df["symbol"].isin(market_etfs.values())].query('etf == "Y"').symbol)
+    if get_technical_etfs:
+        etf_symbol_list.append(symbols_df.loc[symbols_df["symbol"].isin(technical_etfs.values())].query('etf == "Y"').symbol)
+    if get_indicies:
+        etf_symbol_list.append(Series(list(indicies.values()), name="symbol"))
     if get_sp500:
         equity_symbol_list.append(symbols_df.query("sp500 == True").query('etf == "N"').symbol)
     if get_dowjones:
