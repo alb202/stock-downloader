@@ -1,5 +1,5 @@
 from pandas import Timestamp
-from pandera.pandas import DataFrameSchema, Column, Check, Index, MultiIndex
+from pandera.pandas import DataFrameSchema, Column, Check, Index #, MultiIndex
 
 price_schema = DataFrameSchema(
     columns={
@@ -112,7 +112,7 @@ price_schema = DataFrameSchema(
             title=None,
         ),
         "volume": Column(
-            dtype="int32",
+            dtype="Int32",
             checks=[
                 Check.greater_than_or_equal_to(
                     min_value=0,
@@ -165,7 +165,7 @@ price_schema = DataFrameSchema(
     },
     checks=None,
     index=Index(
-        dtype="int64",
+        dtype="Int64",
         checks=None,
         nullable=False,
         coerce=True,

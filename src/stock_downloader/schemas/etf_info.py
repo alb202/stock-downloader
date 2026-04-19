@@ -648,7 +648,7 @@ etf_info_schema = DataFrameSchema(
             title=None,
         ),
         "first_trade_date_milliseconds": Column(
-            dtype="int64",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
@@ -980,7 +980,7 @@ etf_info_schema = DataFrameSchema(
     },
     checks=None,
     index=Index(
-        dtype="int64",
+        dtype="Int64",
         checks=[
             Check.greater_than_or_equal_to(min_value=0.0, raise_warning=False, ignore_na=True),
             Check.less_than_or_equal_to(max_value=99.0, raise_warning=False, ignore_na=True),

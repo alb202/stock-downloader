@@ -387,7 +387,7 @@ ta__ma_ratio_schema = DataFrameSchema(
     },
     checks=None,
     index=Index(
-        dtype="int64",
+        dtype="Int64",
         checks=None,
         nullable=False,
         coerce=True,

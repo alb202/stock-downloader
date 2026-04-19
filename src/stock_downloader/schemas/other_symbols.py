@@ -1,4 +1,4 @@
-from pandera.pandas import DataFrameSchema, Column, Check, Index, MultiIndex
+from pandera.pandas import DataFrameSchema, Column, Check, Index  # , MultiIndex
 
 other_symbols_schema = DataFrameSchema(
     columns={
@@ -45,7 +45,7 @@ other_symbols_schema = DataFrameSchema(
     },
     checks=None,
     index=Index(
-        dtype="int64",
+        dtype="Int64",
         checks=None,
         nullable=False,
         coerce=True,

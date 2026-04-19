@@ -1,5 +1,5 @@
 from pandas import Timestamp
-from pandera.pandas import DataFrameSchema, Column, Check, Index, MultiIndex
+from pandera.pandas import DataFrameSchema, Column, Check, Index #, MultiIndex
 
 regression_schema = DataFrameSchema(
     columns={
@@ -22,7 +22,7 @@ regression_schema = DataFrameSchema(
             title=None,
         ),
         "max_regression_days": Column(
-            dtype="int64",
+            dtype="Int64",
             checks=[
                 Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True),
                 Check.less_than_or_equal_to(max_value=10000, raise_warning=False, ignore_na=True),
@@ -146,7 +146,7 @@ regression_schema = DataFrameSchema(
             title=None,
         ),
         "length": Column(
-            dtype="int64",
+            dtype="Int64",
             checks=[
                 Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True),
                 Check.less_than_or_equal_to(max_value=10000, raise_warning=False, ignore_na=True),
@@ -160,7 +160,7 @@ regression_schema = DataFrameSchema(
             title=None,
         ),
         "start_ordinal": Column(
-            dtype="int64",
+            dtype="Int64",
             checks=[Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True)],
             nullable=True,
             unique=False,
@@ -171,7 +171,7 @@ regression_schema = DataFrameSchema(
             title=None,
         ),
         "end_ordinal": Column(
-            dtype="int64",
+            dtype="Int64",
             checks=[Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True)],
             nullable=True,
             unique=False,
@@ -276,7 +276,7 @@ regression_schema = DataFrameSchema(
             title=None,
         ),
         "line_start_ordinal_x": Column(
-            dtype="int64",
+            dtype="Int64",
             checks=[Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True)],
             nullable=True,
             unique=False,
@@ -287,7 +287,7 @@ regression_schema = DataFrameSchema(
             title=None,
         ),
         "line_end_ordinal_x": Column(
-            dtype="int64",
+            dtype="Int64",
             checks=[Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True)],
             nullable=True,
             unique=False,
@@ -410,7 +410,7 @@ regression_schema = DataFrameSchema(
     },
     checks=None,
     index=Index(
-        dtype="int64",
+        dtype="Int64",
         checks=None,
         nullable=False,
         coerce=True,

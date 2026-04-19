@@ -110,7 +110,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "HT_TRENDMODE": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -880,7 +880,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDL2CROWS": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -891,7 +891,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDL3BLACKCROWS": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -902,7 +902,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDL3INSIDE": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -913,7 +913,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDL3LINESTRIKE": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -924,7 +924,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDL3OUTSIDE": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -935,7 +935,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDL3STARSINSOUTH": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -946,7 +946,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDL3WHITESOLDIERS": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -957,7 +957,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLABANDONEDBABY_0": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -968,7 +968,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLADVANCEBLOCK": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -979,7 +979,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLBELTHOLD": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -990,7 +990,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLBREAKAWAY": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1001,7 +1001,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLCLOSINGMARUBOZU": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1012,7 +1012,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLCONCEALBABYSWALL": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1023,7 +1023,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLCOUNTERATTACK": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1034,7 +1034,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLDARKCLOUDCOVER_0": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1045,7 +1045,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLDOJI": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1056,7 +1056,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLDOJISTAR": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1067,7 +1067,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLDRAGONFLYDOJI": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1078,7 +1078,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLENGULFING": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1089,7 +1089,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLEVENINGDOJISTAR_0": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1100,7 +1100,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLEVENINGSTAR_0": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1111,7 +1111,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLGAPSIDESIDEWHITE": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1122,7 +1122,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLGRAVESTONEDOJI": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1133,7 +1133,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLHAMMER": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1144,7 +1144,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLHANGINGMAN": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1155,7 +1155,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLHARAMI": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1166,7 +1166,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLHARAMICROSS": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1177,7 +1177,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLHIGHWAVE": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1188,7 +1188,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLHIKKAKE": Column(
-            dtype="int16",
+            dtype="Int16",
             checks=None,
             nullable=False,
             unique=False,
@@ -1199,7 +1199,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLHIKKAKEMOD": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1210,7 +1210,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLHOMINGPIGEON": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1221,7 +1221,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLIDENTICAL3CROWS": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1232,7 +1232,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLINNECK": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1243,7 +1243,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLINVERTEDHAMMER": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1254,7 +1254,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLKICKING": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1265,7 +1265,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLKICKINGBYLENGTH": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1276,7 +1276,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLLADDERBOTTOM": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1287,7 +1287,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLLONGLEGGEDDOJI": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1298,7 +1298,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLLONGLINE": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1309,7 +1309,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLMARUBOZU": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1320,7 +1320,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLMATCHINGLOW": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1331,7 +1331,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLMATHOLD_0": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1342,7 +1342,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLMORNINGDOJISTAR_0": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1353,7 +1353,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLMORNINGSTAR_0": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1364,7 +1364,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLONNECK": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1375,7 +1375,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLPIERCING": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1386,7 +1386,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLRICKSHAWMAN": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1397,7 +1397,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLRISEFALL3METHODS": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1408,7 +1408,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLSEPARATINGLINES": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1419,7 +1419,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLSHOOTINGSTAR": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1430,7 +1430,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLSHORTLINE": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1441,7 +1441,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLSPINNINGTOP": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1452,7 +1452,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLSTALLEDPATTERN": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1463,7 +1463,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLSTICKSANDWICH": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1474,7 +1474,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLTAKURI": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1485,7 +1485,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLTASUKIGAP": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1496,7 +1496,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLTHRUSTING": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1507,7 +1507,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLTRISTAR": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1518,7 +1518,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLUNIQUE3RIVER": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1529,7 +1529,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLUPSIDEGAP2CROWS": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1540,7 +1540,7 @@ talib_schema = DataFrameSchema(
             title=None,
         ),
         "CDLXSIDEGAP3METHODS": Column(
-            dtype="int8",
+            dtype="Int8",
             checks=None,
             nullable=False,
             unique=False,
@@ -1850,7 +1850,7 @@ talib_schema = DataFrameSchema(
     },
     checks=None,
     index=Index(
-        dtype="int64",
+        dtype="Int64",
         checks=None,
         nullable=False,
         coerce=True,
