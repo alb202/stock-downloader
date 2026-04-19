@@ -17,7 +17,7 @@ class YahooFinancePriceHistory:
 
     DATE_FORMAT = "%Y-%m-%d"
 
-    def __init__(self, symbol: str, interval: str = "1d", period: str = "5y") -> None:
+    def __init__(self, symbol: str, interval: str = "1d", period: str = "10y") -> None:
         self.symbol = symbol
         self.interval = interval
         self.period = period
