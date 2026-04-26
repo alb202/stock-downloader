@@ -43,7 +43,7 @@ import duckdb
 from loguru import logger
 
 
-def main():
+def main(sample_num: int | float = None):
     logger.info("Running Stock Downloader!")
 
     logger.info("Load the configuration file")
@@ -104,7 +104,7 @@ def main():
         get_dowjones=config.get("symbols").get("get_dowjones"),
         get_nasdaq100=config.get("symbols").get("get_nasdaq100"),
         get_sp500=config.get("symbols").get("get_sp500"),
-        sample=None,
+        sample=sample_num,
     )
 
     logger.info("Create the list of symbols to process")
@@ -198,4 +198,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(sample_num=None)
