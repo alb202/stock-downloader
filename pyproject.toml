@@ -35,6 +35,7 @@ dependencies = [
     "dagster-dg-cli==1.11.6",
     "dagster-dg-core==1.11.6",
     "dagster-duckdb>=0.27.6",
+    "dagster-duckdb-pandas>=0.27.6",
     "dagster-graphql==1.11.6",
     "dagster-pipes==1.11.6",
     "dagster-shared==1.11.6",
@@ -60,6 +61,7 @@ dependencies = [
     "grpcio==1.74.0",
     "grpcio-health-checking==1.71.2",
     "h11==0.16.0",
+    "html5lib>=1.1",
     "httpcore==1.0.9",
     "httptools==0.6.4",
     "httpx==0.28.1",
@@ -198,9 +200,9 @@ ta-lib = { path = "talib/ta_lib-0.6.4-cp313-cp313-win_amd64.whl" }
 directory_type = "project"
 
 [tool.dg.project]
-root_module = "workflow_manager"
+root_module = "dagster"
 registry_modules = [
-    "workflow_manager.components.*",
+    "dagster.components.*",
 ]
 
 
