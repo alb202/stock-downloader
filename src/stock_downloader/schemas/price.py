@@ -112,7 +112,7 @@ price_schema = DataFrameSchema(
             title=None,
         ),
         "volume": Column(
-            dtype="Int32",
+            dtype="Int64",
             checks=[
                 Check.greater_than_or_equal_to(
                     min_value=0,

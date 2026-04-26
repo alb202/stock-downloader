@@ -252,7 +252,7 @@ etf_info_schema = DataFrameSchema(
             title=None,
         ),
         "bid_size": Column(
-            dtype="float32",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
@@ -263,7 +263,7 @@ etf_info_schema = DataFrameSchema(
             title=None,
         ),
         "ask_size": Column(
-            dtype="float32",
+            dtype="Int64",
             checks=None,
             nullable=True,
             unique=False,
