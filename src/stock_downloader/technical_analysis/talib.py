@@ -6,7 +6,7 @@ from tqdm.auto import tqdm
 from stock_downloader.utilities import downcast_numeric_columns
 
 
-def run_talib_functions(df: DataFrame, functions: list[dict], pattern_columns: list[str]) -> DataFrame:
+def run_talib_functions(df: DataFrame, functions: list[dict], pattern_columns: list[str], pattern_col_scaler: float = 1) -> DataFrame:
     # Store each function's result dataframe
 
     input_map = {
@@ -81,7 +81,7 @@ def run_talib_functions(df: DataFrame, functions: list[dict], pattern_columns: l
 
     for col in final_df.columns:
         if col in pattern_columns:
-            final_df[col] = final_df[col] / 100
+            final_df[col] = final_df[col] / pattern_col_scaler
 
     # Show the final result
     return final_df.dropna(how="all", axis=1)  # .dropna(how='any', axis=0)
