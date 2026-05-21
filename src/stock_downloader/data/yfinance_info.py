@@ -29,7 +29,7 @@ class YahooFinanceTickerInfo:
         return [self.data]
 
     def get_info(self) -> dict:
-        """Fetch sector and industry information for the given symbols."""
+        """Fetch information for the given symbols."""
 
         ticker = yf.Ticker(self.symbol.upper())
         info = ticker.info
