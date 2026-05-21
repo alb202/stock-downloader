@@ -13,6 +13,7 @@ utilities = "VPU"
 
 ["market_etfs"]
 sp500 = "SPY"
+sp500_2 = "VOO"
 nasdaq = "QQQ"
 
 ["technical_etfs"]
@@ -22,3 +23,6 @@ vix_shortterm_futures = "VIXY"
 ["indicies"]
 volatility = "^VIX"
 volatility_2 = "^VVIX"
+
+["watchlist"]
+watchlist = ["SIMO", "AMD", "MRNA", "ABBV", "NVDA", "PFE", "SM", "TM"]
