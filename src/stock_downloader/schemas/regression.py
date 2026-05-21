@@ -3,6 +3,28 @@ from pandera.pandas import DataFrameSchema, Column, Check, Index  # , MultiIndex
 
 regression_schema = DataFrameSchema(
     columns={
+        "date": Column(
+            dtype="datetime64[ns]",
+            checks=[
+                Check.greater_than_or_equal_to(
+                    min_value=Timestamp("1900-01-1 00:00:00"),
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+                Check.less_than_or_equal_to(
+                    max_value=Timestamp("2030-01-01 00:00:00"),
+                    raise_warning=False,
+                    ignore_na=True,
+                ),
+            ],
+            nullable=False,
+            unique=False,
+            coerce=True,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
         "symbol": Column(
             dtype="object",
             checks=[
@@ -21,13 +43,10 @@ regression_schema = DataFrameSchema(
             description=None,
             title=None,
         ),
-        "max_regression_days": Column(
-            dtype="Int64",
-            checks=[
-                Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True),
-                Check.less_than_or_equal_to(max_value=10000, raise_warning=False, ignore_na=True),
-            ],
-            nullable=True,
+        "name": Column(
+            dtype="object",
+            checks=None,
+            nullable=False,
             unique=False,
             coerce=True,
             required=True,
@@ -35,21 +54,13 @@ regression_schema = DataFrameSchema(
             description=None,
             title=None,
         ),
-        "date": Column(
-            dtype="datetime64[ns]",
+        "max_regression_days": Column(
+            dtype="Int64",
             checks=[
-                Check.greater_than_or_equal_to(
-                    min_value=Timestamp("1900-01-1 00:00:00"),
-                    raise_warning=False,
-                    ignore_na=True,
-                ),
-                Check.less_than_or_equal_to(
-                    max_value=Timestamp("2030-01-01 00:00:00"),
-                    raise_warning=False,
-                    ignore_na=True,
-                ),
+                Check.greater_than_or_equal_to(min_value=0, raise_warning=False, ignore_na=True),
+                Check.less_than_or_equal_to(max_value=10000, raise_warning=False, ignore_na=True),
             ],
-            nullable=False,
+            nullable=True,
             unique=False,
             coerce=True,
             required=True,

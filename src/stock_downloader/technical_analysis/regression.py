@@ -34,13 +34,15 @@ def data_between_dates(
     ordinal_date_column: str = "Date_Ordinal",
 ) -> DataFrame:
     df.loc[:, date_column] = to_datetime(df[date_column])
-    df = df.copy(deep=True).query(f"{date_column} >= @start_date").query(f"{date_column} <= @end_date")
+    df = df.copy(deep=True)
+    df = df.loc[df[date_column] >= start_date]
+    df = df.loc[df[date_column] <= end_date]
     df.loc[:, ordinal_date_column] = df[date_column].map(Timestamp.toordinal)
     return df.sort_values(date_column).loc[:, [date_column, ordinal_date_column, price_column]].reset_index(drop=True)
 
 
-def calculate_std(x: Series, y: Series, regression_result: LinregressResult | RegressionResult) -> float:
-    line = regression_result.slope * x + regression_result.intercept
+def calculate_std(x: Series, y: Series, slope: float, intercept: float) -> float:
+    line: Series = slope * x + intercept
     return (y - line).std()
 
 
@@ -82,12 +84,14 @@ def get_best_result(
     x_ = data[date_column]
     y = data[price_column]
     try:
-        best_pearson_r = find_best_pearson_r(x=x_, y=y, use_abs=True, min_days=min_regression_days)
-        best_start_date = best_pearson_r.date
-        best_result = linear_regression_between_dates(
+        best_pearson_r: BestCorrelation = find_best_pearson_r(x=x_, y=y, use_abs=True, min_days=min_regression_days)
+        best_start_date: Timestamp = best_pearson_r.date
+        best_result: RegressionResult = linear_regression_between_dates(
             df=data, start=best_start_date, end=date, price_column=price_column, date_column=date_column
         )
-        best_lines = make_regression_lines(result=best_result, lower_deviation=lower_deviation, upper_deviation=upper_deviation)
+        best_lines: RegressionLines = make_regression_lines(
+            result=best_result, lower_deviation=lower_deviation, upper_deviation=upper_deviation
+        )
 
         return BestResults(
             max_regression_days=max_regression_days,
@@ -129,9 +133,9 @@ def linear_regression_between_dates(
     x = df["Date_Ordinal"]
     y = df[price_column]
 
-    result = linregress(x, y)
-    std = calculate_std(x, y, result)
-
+    result = linregress(x=x, y=y)
+    std = calculate_std(x=x, y=y, slope=result.slope, intercept=result.intercept)
+    # std = result.stderr * (((end - start).days + 1) ** 0.5)
     return RegressionResult(
         start=start,
         end=end,
@@ -165,7 +169,11 @@ def find_best_pearson_r(
     Sxy = np.cumsum((x_index * y)[::-1])[::-1]
 
     # Candidate starting indices (need at least 2 points, so 0..n-2)
-    i_vals = np.arange(0, n - min_days)
+    # Calculate the calendar day that is min_days before the latest day, then
+    # calculate the number of trading days that is, then subtract that from the total
+    # i_vals = np.arange(0, n - min_days)
+    i_vals = np.arange(0, n - (x > back_in_time(date=x.iloc[-1], days=min_days)).sum())
+
     count = n - i_vals
 
     sum_x = Sx[i_vals]

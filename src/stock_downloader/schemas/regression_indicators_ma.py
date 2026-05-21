@@ -43,6 +43,17 @@ regression_indicators_ma_schema = DataFrameSchema(
             description=None,
             title=None,
         ),
+        "name": Column(
+            dtype="object",
+            checks=None,
+            nullable=False,
+            unique=False,
+            coerce=True,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
         "CHANNEL_CLOSE_VS_MINUS_MA5": Column(
             dtype="float64",
             checks=None,

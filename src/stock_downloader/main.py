@@ -7,6 +7,8 @@ from stock_downloader.data.listed_symbols import StockSymbolDownloader
 from stock_downloader.data.yfinance_batch import YahooFinanceBatchDownloader
 from stock_downloader.data.yfinance_info import YahooFinanceTickerInfo
 from stock_downloader.data.yfinance_price import YahooFinancePriceHistory
+from stock_downloader.data.yfinance_sectors import YahooFinanceSectorInfo
+
 from stock_downloader.technical_analysis.talib import (
     run_all_talib,
     run_all_custom_ta,
@@ -41,6 +43,7 @@ from stock_downloader.data.select_symbols import select_symbols, symbolLists
 
 import duckdb
 from loguru import logger
+from pandas import DataFrame, concat
 
 
 def main(sample_num: int | float = None):
@@ -61,6 +64,7 @@ def main(sample_num: int | float = None):
         raise ConnectionError("Unable to connect to the database. Please check the database path and try again.")
 
     logger.info("Retrieve the symbol files")
+    # sector_data = YahooFinanceSectorInfo()
     nasdaq_symbols_df = NasdaqDownloader().df
     other_symbols_df = StockSymbolDownloader().df
     index_symbols_df = GetIndexSymbols().df
@@ -69,6 +73,11 @@ def main(sample_num: int | float = None):
     nasdaq_symbols_df = rename_and_select_columns(df=nasdaq_symbols_df, mappings=column_mappings.get("nasdaq_symbols"))
     other_symbols_df = rename_and_select_columns(df=other_symbols_df, mappings=column_mappings.get("other_symbols"))
     index_symbols_df = rename_and_select_columns(df=index_symbols_df, mappings=column_mappings.get("indicies"))
+
+    # logger.info("Rename and select the sector tables")
+    # sector_info_df = rename_and_select_columns(df=sector_data.sector_info, mappings=column_mappings.get("sector_info"))
+    # industry_info_df = rename_and_select_columns(df=sector_data.industry_info, mappings=column_mappings.get("industry_info"))
+    # sector_etfs_df = rename_and_select_columns(df=sector_data.sector_etfs, mappings=column_mappings.get("sector_etfs"))
 
     # Validate symbol data
     logger.info("Validate the symbol tables")
@@ -108,7 +117,8 @@ def main(sample_num: int | float = None):
     )
 
     logger.info("Create the list of symbols to process")
-    all_symbols = sorted(set(symbol_lists.equity + symbol_lists.etf))
+    watchlist_symbols: list = list(load_mappings(name="other_symbols").get("watchlist").get("watchlist"))
+    all_symbols: list = sorted(set(symbol_lists.equity + symbol_lists.etf + watchlist_symbols))
 
     logger.info(f"Equity symbols to process: {len(symbol_lists.equity)}")
     logger.info(f"ETF symbols to process: {len(symbol_lists.etf)}")
@@ -126,9 +136,36 @@ def main(sample_num: int | float = None):
 
     price_df = all_price.data.copy(deep=True)
 
-    logger.info("Find best regression lines")
-    regression_df = run_all_regression(price_df=price_df, regression_config=config.get("regression"))
+    logger.info("Start regression analysis")
+    regression_results: list = []
+    regression_indicators_results: list = []
+    regression_indicators_ma_results: list = []
+
+    for name, regression_config in config.get("regression").items():
+        logger.info("Find best regression lines")
+        regression_df_ = run_all_regression(price_df=price_df, regression_config=regression_config).assign(name=name)
+
+        logger.info("Calculate regression channel relative price positions")
+        regression_indicators_df_ = run_all_custom_ta(
+            data_df=price_df.merge(regression_df_.rename(columns={"date": "Date"}), on=["symbol", "Date"], how="inner"),
+            functions=custom_ta_sets__regression_channel,
+        ).assign(name=name)
+        logger.info("Calculate regression moving averages")
+        regression_indicators_ma_df_ = run_all_custom_ta(
+            data_df=regression_indicators_df_, functions=custom_ta_sets__regression_channel_ma
+        ).assign(name=name)
+
+        regression_results.append(regression_df_)
+        regression_indicators_results.append(regression_indicators_df_)
+        regression_indicators_ma_results.append(regression_indicators_ma_df_)
+
+    regression_df: DataFrame = concat(regression_results)
+    regression_indicators_df: DataFrame = concat(regression_indicators_results)
+    regression_indicators_ma_df: DataFrame = concat(regression_indicators_ma_results)
+
     regression_df.to_parquet(output_folder / "regression_data.parquet", index=False)
+    regression_indicators_df.to_parquet(output_folder / "regression_indicators.parquet", index=False)
+    regression_indicators_ma_df.to_parquet(output_folder / "regression_indicators_ma.parquet", index=False)
 
     logger.info("Calculate talib indicators")
     talib__df = run_all_talib(data_df=price_df, functions=talib_functions, pattern_columns=pattern_columns)
@@ -149,30 +186,36 @@ def main(sample_num: int | float = None):
     ma_future_df = run_all_custom_ta(data_df=price_df, functions=custom_ta_sets__future)
     ma_future_df.to_parquet(output_folder / "ta__future.parquet", index=False)
 
-    logger.info("Calculate regression channel relative price positions")
-    regression_indicators_df = run_all_custom_ta(
-        data_df=price_df.merge(regression_df.rename(columns={"date": "Date"}), on=["symbol", "Date"], how="inner"),
-        functions=custom_ta_sets__regression_channel,
-    )
-    regression_indicators_df.to_parquet(output_folder / "regression_indicators.parquet")
+    # logger.info("Calculate regression channel relative price positions")
+    # regression_indicators_df = run_all_custom_ta(
+    #     data_df=price_df.merge(regression_df.rename(columns={"date": "Date"}), on=["symbol", "Date"], how="inner"),
+    #     functions=custom_ta_sets__regression_channel,
+    # )
+    # regression_indicators_df.to_parquet(output_folder / "regression_indicators.parquet")
 
-    logger.info("Calculate regression moving averages")
-    regression_indicators_ma_df = run_all_custom_ta(data_df=regression_indicators_df, functions=custom_ta_sets__regression_channel_ma)
-    regression_indicators_ma_df.to_parquet(output_folder / "regression_indicators_ma.parquet")
+    # logger.info("Calculate regression moving averages")
+    # regression_indicators_ma_df = run_all_custom_ta(data_df=regression_indicators_df, functions=custom_ta_sets__regression_channel_ma)
+    # regression_indicators_ma_df.to_parquet(output_folder / "regression_indicators_ma.parquet")
 
     logger.info("Format columns for each dataframe to be added to database")
-    regression_indicators_ma_df = rename_and_select_columns(
-        df=regression_indicators_ma_df, mappings=column_mappings.get("regression_indicators_ma")
-    )
-    regression_indicators_df = rename_and_select_columns(df=regression_indicators_df, mappings=column_mappings.get("regression_indicators"))
-    ma_future_df = rename_and_select_columns(df=ma_future_df, mappings=column_mappings.get("ma_future"))
-    ta__change__df = rename_and_select_columns(df=ta__change__df, mappings=column_mappings.get("ta__change"))
-    ta__ma_ratio__df = rename_and_select_columns(df=ta__ma_ratio__df, mappings=column_mappings.get("ta__ma_ratio"))
-    talib__df = rename_and_select_columns(df=talib__df, mappings=column_mappings.get("ta__talib"))
-    regression_df = rename_and_select_columns(df=regression_df, mappings=column_mappings.get("regression"))
     price_df = rename_and_select_columns(df=price_df, mappings=column_mappings.get("price"))
     equity_info_df = rename_and_select_columns(df=equity_info.data, mappings=column_mappings.get("equity_info"))
     etf_info_df = rename_and_select_columns(df=etf_info.data, mappings=column_mappings.get("etf_info"))
+
+    talib__df = rename_and_select_columns(df=talib__df, mappings=column_mappings.get("ta__talib"))
+    ta__change__df = rename_and_select_columns(df=ta__change__df, mappings=column_mappings.get("ta__change"))
+    ta__ma_ratio__df = rename_and_select_columns(df=ta__ma_ratio__df, mappings=column_mappings.get("ta__ma_ratio"))
+    ma_future_df = rename_and_select_columns(df=ma_future_df, mappings=column_mappings.get("ma_future"))
+
+    regression_df = rename_and_select_columns(df=regression_df, mappings=column_mappings.get("regression")).sort_values(
+        ["symbol", "date", "name"]
+    )
+    regression_indicators_df = rename_and_select_columns(
+        df=regression_indicators_df, mappings=column_mappings.get("regression_indicators")
+    ).sort_values(["symbol", "date", "name"])
+    regression_indicators_ma_df = rename_and_select_columns(
+        df=regression_indicators_ma_df, mappings=column_mappings.get("regression_indicators_ma")
+    ).sort_values(["symbol", "date", "name"])
 
     # Write to database
     logger.info("Create database connection")
@@ -198,4 +241,4 @@ def main(sample_num: int | float = None):
 
 
 if __name__ == "__main__":
-    main(sample_num=None)
+    main(sample_num=1)

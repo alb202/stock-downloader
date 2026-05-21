@@ -1,5 +1,5 @@
 from pandas import Timestamp
-from pandera.pandas import DataFrameSchema, Column, Check, Index #, MultiIndex
+from pandera.pandas import DataFrameSchema, Column, Check, Index  # , MultiIndex
 
 regression_indicators_schema = DataFrameSchema(
     columns={
@@ -35,6 +35,17 @@ regression_indicators_schema = DataFrameSchema(
                     ignore_na=True,
                 )
             ],
+            nullable=False,
+            unique=False,
+            coerce=True,
+            required=True,
+            regex=False,
+            description=None,
+            title=None,
+        ),
+        "name": Column(
+            dtype="object",
+            checks=None,
             nullable=False,
             unique=False,
             coerce=True,

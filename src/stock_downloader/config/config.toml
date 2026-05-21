@@ -6,9 +6,21 @@ database_name = 'stocks'
 output_folder = "D:/stocks/output/raw_data/"
 temp_folder = "D:/stocks/output/tmp/"
 
-[regression]
-max_regression_days = 730
-min_regression_days = 10
+[regression.short]
+max_regression_days = 180
+min_regression_days = 30
+date_column = 'Date'
+price_column = 'Close'
+
+[regression.medium]
+max_regression_days = 365
+min_regression_days = 180
+date_column = 'Date'
+price_column = 'Close'
+
+[regression.long]
+max_regression_days = 1095
+min_regression_days = 365
 date_column = 'Date'
 price_column = 'Close'
 

@@ -48,6 +48,7 @@ company_name = "company_name"
 ["regression_indicators"]
 Date = "date"
 symbol = "symbol"
+name = "name"
 CHANNEL_CLOSE_VS_LINE = "CHANNEL_CLOSE_VS_LINE"
 CHANNEL_CLOSE_VS_MINUS = "CHANNEL_CLOSE_VS_MINUS"
 CHANNEL_CLOSE_VS_PLUS = "CHANNEL_CLOSE_VS_PLUS"
@@ -61,6 +62,7 @@ CHANNEL_HIGH_VS_PLUS = "CHANNEL_HIGH_VS_PLUS"
 ["regression_indicators_ma"]
 Date = "date"
 symbol = "symbol"
+name = "name"
 CHANNEL_CLOSE_VS_MINUS_MA5 = "CHANNEL_CLOSE_VS_MINUS_MA5"
 CHANNEL_CLOSE_VS_MINUS_MA10 = "CHANNEL_CLOSE_VS_MINUS_MA10"
 CHANNEL_CLOSE_VS_MINUS_MA15 = "CHANNEL_CLOSE_VS_MINUS_MA15"
@@ -352,6 +354,7 @@ OBV = "OBV"
 
 ["regression"]
 symbol = "symbol"
+name = "name"
 max_regression_days = "max_regression_days"
 date = "date"
 earliest_start_date = "earliest_start_date"
